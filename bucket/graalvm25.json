@@ -5,7 +5,10 @@
     "license": "GPL-2.0",
     "url": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-25.0.1/graalvm-community-jdk-25.0.1_windows-x64_bin.zip",
     "hash": "fde83c5ceec2c75560c747ccd9f314f90e4cf5c5287416e67c4ce442e344ca27",
-    "extract_dir": "$dir",
+    "pre_install": [
+        "$d = Get-ChildItem $dir | Where-Object { $_.PSIsContainer }",
+        "if ($d.Count -eq 1) { Move-Item \"$($d.FullName)/*\" $dir -Force }"
+    ],
     "env_add_path": "bin",
     "env_set": {
         "JAVA_HOME": "$dir",
@@ -17,7 +20,6 @@
     },
     "autoupdate": {
         "url": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-$version/graalvm-community-jdk-$version_windows-x64_bin.zip",
-        "extract_dir": "$dir",
         "hash": {
             "url": "$url.sha256"
         }
