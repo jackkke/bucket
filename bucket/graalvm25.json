@@ -5,24 +5,19 @@
     "license": "GPL-2.0",
     "url": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-25.0.1/graalvm-community-jdk-25.0.1_windows-x64_bin.zip",
     "hash": "fde83c5ceec2c75560c747ccd9f314f90e4cf5c5287416e67c4ce442e344ca27",
-    "extract_to": "tmp",
-    "installer": {
-        "script": [
-            "(Get-ChildItem -Directory \"$dir\\tmp\").FullName | % { Move-Item \"$_\\*\" \"$dir\" }",
-            "Remove-Item -Recurse \"$dir\\tmp\""
-        ]
-    },
+    "extract_dir": "graalvm-community-jdk-25.0.1",
     "env_add_path": "bin",
     "env_set": {
         "JAVA_HOME": "$dir",
         "GRAALVM_HOME": "$dir"
     },
     "checkver": {
-       "github": "graalvm/graalvm-ce-builds",
+        "url": "https://www.graalvm.org/downloads/",
         "regex": "jdk-(25[\\d.]+)"
     },
     "autoupdate": {
         "url": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-$version/graalvm-community-jdk-$version_windows-x64_bin.zip",
+        "extract_dir": "graalvm-community-jdk-$version",
         "hash": {
             "url": "$url.sha256"
         }
